@@ -68,11 +68,16 @@ namespace ControleMedicamentos.ConsoleApp.MóduloRequisicao
                 return;
             }
 
-            Requisicao novaRequisicao = ObterRequisicao(pacienteSelecionado, medicamentoSelecionado, novaRequisicao);
-
-            _repositorioRequisicao.Inserir(novaRequisicao);
-
-            _notificador.ApresentarMensagem("Requisição cadastrada com sucesso!", TipoMensagem.Sucesso);
+            var novaRequisicao = ObterRequisicao(pacienteSelecionado, medicamentoSelecionado);
+            if (novaRequisicao == null)
+            {
+                _notificador.ApresentarMensagem("Não foi possível cadastrar.", TipoMensagem.Atencao);
+            }
+            else
+            {
+                _repositorioRequisicao.Inserir(novaRequisicao);
+                _notificador.ApresentarMensagem("Requisição cadastrada com sucesso!", TipoMensagem.Sucesso);
+            }
         }
 
         private Paciente ObtemPaciente()
@@ -93,6 +98,11 @@ namespace ControleMedicamentos.ConsoleApp.MóduloRequisicao
             Paciente pacienteSelecionado = _repositorioPaciente.SelecionarRegistro(numeroPacienteRequisicao);
 
             return pacienteSelecionado;
+        }
+
+        public void VisualizarMedicamentosMaisRetirados()
+        {
+            Console.WriteLine("Função não implementada.");
         }
 
         private Medicamento ObtemMedicamento()
@@ -136,21 +146,23 @@ namespace ControleMedicamentos.ConsoleApp.MóduloRequisicao
             return true;
         }
 
-        //public List<Medicamento> VerificarMedicamentosMaisRetirados()
-        //{
-        //    return 
-        //}
-
-        private Requisicao ObterRequisicao(Paciente paciente, Medicamento medicamento, Requisicao novaRequisicao)
+        private Requisicao ObterRequisicao(Paciente paciente, Medicamento medicamento)
         {
+            Requisicao novaRequisicao = new Requisicao(paciente, medicamento, DateTime.Now.Date, DateTime.Now.Hour);
+
             Console.WriteLine("Digite a quantidade de Caixas do medicamento que deseja pegar: ");
             int quantidadeCaixasMedicamento = Convert.ToInt32(Console.ReadLine());
-            if (quantidadeCaixasMedicamento > 5)
+
+            if (quantidadeCaixasMedicamento > 5 || quantidadeCaixasMedicamento > medicamento.Quantidade)
+                return null;
+            else
             {
-                novaRequisicao.VerificarRequisicaoAprovada();
+                novaRequisicao.Aprovada = true;
+                medicamento.Quantidade = medicamento.Quantidade - quantidadeCaixasMedicamento;
             }
 
-            Requisicao novaRequisicao = new Requisicao(paciente, medicamento, DateTime.Now.Date, DateTime.Now.Hour, quantidadeCaixasMedicamento);
+            novaRequisicao.QuantidadeCaixas = quantidadeCaixasMedicamento;
+
             return novaRequisicao;
         }
     }

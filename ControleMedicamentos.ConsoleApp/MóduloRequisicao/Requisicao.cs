@@ -12,16 +12,14 @@ namespace ControleMedicamentos.ConsoleApp.MóduloRequisicao
         public bool Aprovada { get; set; }
         public DateTime Data { get; }
         public int Hora { get; }
-        public int QuantidadeCaixas { get; }
+        public int QuantidadeCaixas { get; set; }
 
-        public Requisicao(Paciente paciente, Medicamento medicamento, DateTime data, int hora, int quantidadeCaixas)
+        public Requisicao(Paciente paciente, Medicamento medicamento, DateTime data, int hora)
         {
             Paciente = paciente;
             Medicamento = medicamento;
             Data = data;
             Hora = hora;
-            QuantidadeCaixas = quantidadeCaixas;
-
         }
         public override string ToString()
         {
@@ -30,11 +28,6 @@ namespace ControleMedicamentos.ConsoleApp.MóduloRequisicao
                 "Medicamento: " + Medicamento + Environment.NewLine +
                 "Data: " + Data + Environment.NewLine +
                 "Hora: " + Hora + Environment.NewLine;
-        }
-
-        public void VerificarRequisicaoAprovada()
-        {
-
         }
     }
 }

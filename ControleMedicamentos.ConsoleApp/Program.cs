@@ -88,8 +88,8 @@ namespace ControleMedicamentos.ConsoleApp
             else if (opcaoSelecionada == "2")
                 telaCadastroRequisicao.Visualizar("Tela");
 
-            //else if (opcaoSelecionada == "3")
-            //    telaCadastroRequisicao.VisualizarMedicamentosMaisRetirados();
+            else if (opcaoSelecionada == "3")
+                telaCadastroRequisicao.VisualizarMedicamentosMaisRetirados();
         }
     }
 }

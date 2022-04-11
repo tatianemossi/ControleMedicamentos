@@ -88,6 +88,7 @@ namespace ControleMedicamentos.ConsoleApp.MóduloPaciente
                 return false;
             }
 
+            Console.WriteLine("Pacientes:");
             foreach (Paciente paciente in pacientes)
                 Console.WriteLine(paciente.ToString());
 

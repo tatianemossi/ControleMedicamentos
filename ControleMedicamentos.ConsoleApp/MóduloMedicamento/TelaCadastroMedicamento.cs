@@ -107,6 +107,7 @@ namespace ControleMedicamentos.ConsoleApp.MóduloMedicamento
                 return false;
             }
 
+            Console.WriteLine("Medicamentos: ");
             foreach (Medicamento medicamento in medicamentos)
                 Console.WriteLine(medicamento.ToString());
 
@@ -127,6 +128,7 @@ namespace ControleMedicamentos.ConsoleApp.MóduloMedicamento
                 return false;
             }
 
+            Console.WriteLine("Medicamentos: ");
             foreach (var medicamentoEmFalta in medicamentosEmFalta)
                 Console.WriteLine(medicamentoEmFalta.ToString());
 
